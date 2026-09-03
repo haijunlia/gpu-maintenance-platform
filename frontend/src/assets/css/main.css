@@ -1,0 +1,76 @@
+/* 自定义样式 */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+}
+
+/* 响应式图表容器 */
+.chart-container {
+  height: 300px;
+  margin-bottom: 1rem;
+}
+
+/* 页面布局 */
+.page-container {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* 统计卡片样式 */
+.stats-card {
+  text-align: center;
+  padding: 20px;
+}
+
+.stats-number {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.stats-label {
+  color: #909399;
+  font-size: 14px;
+}
+
+/* 表格样式优化 */
+.el-table {
+  margin-top: 20px;
+}
+
+/* 筛选表单样式 */
+.filter-form {
+  margin-bottom: 20px;
+}
+
+/* 日志内容样式 */
+.log-content {
+  background-color: #f5f7fa;
+  padding: 16px;
+  border-radius: 4px;
+  max-height: 400px;
+  overflow-y: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* 状态标签样式 */
+.status-tag {
+  font-weight: 500;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .page-container {
+    padding: 10px;
+  }
+  
+  .chart-container {
+    height: 250px;
+  }
+}
