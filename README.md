@@ -1,5 +1,8 @@
 # GPU QC 分析系统 (Vue3 SPA版本)
 
+## 维修记录功能
+
+支持维修记录新增、SN 查询和维修历史查看。
 > 当前发布基线：[`VERSION`](VERSION)（1.2.0）。变更记录见 [`CHANGELOG.md`](CHANGELOG.md)，发布步骤见 [`RELEASING.md`](RELEASING.md)。
 
 ## 项目概述
