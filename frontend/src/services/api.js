@@ -106,6 +106,7 @@ export const gpuApi = {
   getRepairRecords(params) { return api.get('/repair/records', { params }) },
   getRepairCurrentError(sn) { return api.get('/repair/current-error', { params: { sn } }) },
   createRepairRecord(record) { return api.post('/repair/records', record) },
+  updateRepairRecord(id, record) { return api.put(`/repair/records/${id}`, record) },
   deleteRepairRecord(id) { return api.delete(`/repair/records/${id}`) },
   resetRepairRecords() { return api.delete('/repair/records') },
   exportRepairCsv() { return api.post('/repair/export/csv', {}, { responseType: 'blob' }) },

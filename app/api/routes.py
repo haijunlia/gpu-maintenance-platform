@@ -87,6 +87,33 @@ def create_repair_record(record: RepairRecordRequest):
         logger.exception("新增维修记录失败")
         raise HTTPException(status_code=500, detail=f"新增维修记录失败: {exc}") from exc
 
+@router.put("/api/repair/records/{record_id}")
+def update_repair_record(record_id: int, record: RepairRecordRequest):
+    """编辑单条维修记录，并同步写回 PostgreSQL。"""
+    try:
+        with get_db_connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute("""UPDATE gpu_repair_records SET
+                    model=%s, sn=%s, fault=%s, action=%s, technician=%s,
+                    repair_date=COALESCE(%s, repair_date), status=%s, steps=%s,
+                    images=%s::jsonb
+                    WHERE id=%s RETURNING *""",
+                    (record.model, record.sn, record.fault, record.action,
+                     record.technician, record.repair_date, record.status,
+                     record.steps, json.dumps(record.images, ensure_ascii=False), record_id))
+                row = cur.fetchone()
+                if not row:
+                    raise HTTPException(status_code=404, detail="维修记录不存在")
+                columns = [desc[0] for desc in cur.description]
+                result = dict(zip(columns, row))
+                conn.commit()
+                return result
+    except HTTPException:
+        raise
+    except Exception as exc:
+        logger.exception("更新维修记录失败")
+        raise HTTPException(status_code=500, detail=f"更新维修记录失败: {exc}") from exc
+
 @router.get("/api/repair/current-error")
 def get_repair_current_error(sn: str):
     """按 SN 获取综合判定中的当前错误，供维修记录自动填充故障现象。"""
